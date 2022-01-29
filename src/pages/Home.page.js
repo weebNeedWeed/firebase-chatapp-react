@@ -1,20 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import SizeBar from "./../components/SizeBar.component";
 import ChatBox from "../components/ChatBox.component";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function HomePage() {
-	const navigate = useNavigate();
-	const isUserAuthenticated = useSelector((state) => state.user.authenticated);
-
-	useEffect(() => {
-		if (!isUserAuthenticated) {
-			navigate("/login");
-		}
-	}, [isUserAuthenticated, navigate]);
-
 	return (
 		<Box sx={{ p: "15px", width: "100vw", height: "100vh" }}>
 			<Box
