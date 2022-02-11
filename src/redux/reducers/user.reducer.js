@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
+	resetUserData,
 	setUserAuthStatus,
 	setUserName,
 	setUserUid,
@@ -21,7 +22,8 @@ const userReducer = createReducer(initialState, (builder) => {
 		})
 		.addCase(setUserAuthStatus, (state, action) => {
 			state.authenticated = action.payload.status;
-		});
+		})
+		.addCase(resetUserData, () => initialState);
 });
 
 export default userReducer;

@@ -4,7 +4,15 @@ import Message from "./Message.component";
 
 function MessageList() {
 	return (
-		<Box sx={{ flexBasis: "80%", padding: "25px", overflowY: "scroll" }}>
+		<Box
+			sx={{
+				flexBasis: "80%",
+				padding: "25px",
+				overflowY: "scroll",
+				display: "flex",
+				flexDirection: "column",
+			}}
+		>
 			<Message></Message>
 			<Message onLeftSide></Message>
 			<Message onLeftSide></Message>

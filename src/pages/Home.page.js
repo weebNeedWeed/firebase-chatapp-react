@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 function HomePage() {
 	const navigate = useNavigate();
 	const isUserAuthenticated = useSelector((state) => state.user.authenticated);
+	const selectedUser = useSelector((state) => state.chat.selected);
+
+	const renderChatBox =
+		selectedUser.name && selectedUser.uid ? <ChatBox /> : null;
 
 	useEffect(() => {
 		if (!isUserAuthenticated) {
@@ -29,7 +33,7 @@ function HomePage() {
 			>
 				<SizeBar />
 
-				<ChatBox />
+				{renderChatBox}
 			</Box>
 		</Box>
 	);

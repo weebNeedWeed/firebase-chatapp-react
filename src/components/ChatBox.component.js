@@ -4,8 +4,11 @@ import Typography from "@mui/material/Typography";
 import MessageList from "./MessageList.component";
 import UserAvatar from "./UserAvatar.component";
 import ChatInput from "./ChatInput.component";
+import { useSelector } from "react-redux";
 
 function ChatBox() {
+	const selectedUser = useSelector((state) => state.chat.selected);
+
 	return (
 		<Box
 			sx={{
@@ -26,14 +29,14 @@ function ChatBox() {
 				}}
 			>
 				<UserAvatar
-					name="Online user 113213"
+					name={selectedUser.name}
 					sx={{ width: "30px", height: "30px" }}
 				/>
 
 				<Typography
 					sx={{ marginLeft: "10px", fontWeight: "bold", fontSize: "20px" }}
 				>
-					Online user 111322
+					{selectedUser.name}
 				</Typography>
 			</Box>
 

@@ -7,13 +7,11 @@ function Message(props) {
 	const { onLeftSide } = props;
 
 	let messageStyle = {
-		float: "right",
 		flexDirection: "row",
 	};
 
 	if (onLeftSide) {
 		messageStyle = {
-			float: "left",
 			flexDirection: "row-reverse",
 		};
 	}
@@ -22,8 +20,10 @@ function Message(props) {
 		<Box
 			sx={{
 				display: "flex",
+				flexBasis: "100%",
 				columnGap: "10px",
 				marginBottom: "30px",
+				justifyContent: "flex-end",
 				...messageStyle,
 			}}
 		>

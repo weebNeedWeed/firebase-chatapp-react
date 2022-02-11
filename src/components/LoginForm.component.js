@@ -9,7 +9,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUserListRef } from "./../database/refs.database";
-import { set } from "firebase/database";
+import { set, push } from "firebase/database";
 
 function LoginForm() {
 	// Local state for controlling input(TextField)
@@ -31,7 +31,7 @@ function LoginForm() {
 
 	const handleUserLogin = () => {
 		if (isValidUserName) {
-			const userListRef = getUserListRef();
+			const userListRef = push(getUserListRef());
 
 			// Get uid of new data
 			const uid = userListRef.key;

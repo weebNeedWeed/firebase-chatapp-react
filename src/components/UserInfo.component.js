@@ -3,8 +3,23 @@ import Button from "@mui/material/Button";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import UserAvatar from "./UserAvatar.component";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserRefByUid } from "./../database/refs.database";
+import { remove } from "firebase/database";
+import { resetUserData } from "../redux/actions/user.action";
 
 function UserInfo() {
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+
+	const { uid, name: userName } = user;
+
+	const handleUserLogout = () => {
+		const userRef = getUserRefByUid(uid);
+		remove(userRef);
+		dispatch(resetUserData());
+	};
+
 	return (
 		<Box
 			sx={{
@@ -27,7 +42,7 @@ function UserInfo() {
 				<Typography
 					sx={{ marginLeft: "10px", fontWeight: "bold", fontSize: "20px" }}
 				>
-					Username 111
+					{userName}
 				</Typography>
 			</Box>
 
@@ -35,6 +50,7 @@ function UserInfo() {
 				variant="contained"
 				color="secondary"
 				sx={{ flexBasis: "70px", height: "30px" }}
+				onClick={handleUserLogout}
 			>
 				logout
 			</Button>
