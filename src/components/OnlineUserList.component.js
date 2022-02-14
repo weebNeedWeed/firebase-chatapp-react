@@ -1,12 +1,11 @@
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import OnlineUserCard from "./OnlineUserCard.component";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUserListRef } from "./../database/refs.database";
 import { off, onValue } from "firebase/database";
 
 function OnlineUserList() {
-	const dispatch = useDispatch();
 	const userUid = useSelector((state) => state.user.uid);
 	const [onlineUserList, setOnlineUserList] = useState([]);
 
@@ -17,9 +16,11 @@ function OnlineUserList() {
 			const obj = data.val() ?? {};
 
 			const newOnlineUserList = Object.keys(obj).map((key) => {
+				const { name } = obj[key];
+
 				return {
 					uid: key,
-					name: obj[key].name,
+					name,
 				};
 			});
 
@@ -29,7 +30,7 @@ function OnlineUserList() {
 		return () => {
 			off(userListRef);
 		};
-	}, [dispatch]);
+	}, [setOnlineUserList]);
 
 	return (
 		<Box
