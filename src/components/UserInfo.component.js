@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import UserAvatar from "./UserAvatar.component";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,14 @@ function UserInfo() {
 		remove(userRef);
 		dispatch(resetUserData());
 	};
+
+	useEffect(() => {
+		window.addEventListener("beforeunload", handleUserLogout);
+
+		return () => {
+			window.removeEventListener("beforeunload", handleUserLogout);
+		};
+	});
 
 	return (
 		<Box

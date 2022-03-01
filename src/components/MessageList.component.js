@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Message from "./Message.component";
-import { useSelector } from "react-redux";
 import { getRoomRefByUid } from "./../database/refs.database";
 import { off, onValue } from "firebase/database";
+import PropTypes from "prop-types";
 
-function MessageList() {
+function MessageList(props) {
 	const [messageList, setMessageList] = useState([]);
 
-	const userUid = useSelector((state) => state.user.uid);
-	const selectedUserUid = useSelector((state) => state.chat.selected.uid);
-
-	const roomUid =
-		userUid < selectedUserUid
-			? selectedUserUid + userUid
-			: userUid + selectedUserUid;
-
-	console.log(roomUid);
+	const { roomUid, userUid } = props;
 
 	useEffect(() => {
 		const roomRef = getRoomRefByUid(roomUid);
@@ -32,7 +24,7 @@ function MessageList() {
 		return () => {
 			off(roomRef);
 		};
-	}, [setMessageList, roomUid]);
+	}, [roomUid]);
 
 	return (
 		<Box
@@ -54,5 +46,10 @@ function MessageList() {
 		</Box>
 	);
 }
+
+MessageList.propTypes = {
+	roomUid: PropTypes.string,
+	userUid: PropTypes.string,
+};
 
 export default MessageList;

@@ -8,6 +8,14 @@ import { useSelector } from "react-redux";
 
 function ChatBox() {
 	const selectedUser = useSelector((state) => state.chat.selected);
+	const { uid: selectedUserUid, name: selectedUserName } = selectedUser;
+
+	const userUid = useSelector((state) => state.user.uid);
+
+	const roomUid =
+		userUid < selectedUserUid
+			? selectedUserUid + userUid
+			: userUid + selectedUserUid;
 
 	return (
 		<Box
@@ -29,20 +37,20 @@ function ChatBox() {
 				}}
 			>
 				<UserAvatar
-					name={selectedUser.name}
+					name={selectedUserName}
 					sx={{ width: "30px", height: "30px" }}
 				/>
 
 				<Typography
 					sx={{ marginLeft: "10px", fontWeight: "bold", fontSize: "20px" }}
 				>
-					{selectedUser.name}
+					{selectedUserName}
 				</Typography>
 			</Box>
 
-			<MessageList />
+			<MessageList roomUid={roomUid} userUid={userUid} />
 
-			<ChatInput />
+			<ChatInput roomUid={roomUid} userUid={userUid} />
 		</Box>
 	);
 }
