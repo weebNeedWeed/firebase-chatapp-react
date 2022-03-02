@@ -20,7 +20,9 @@ function HomePage() {
 	}, [isUserAuthenticated, navigate]);
 
 	return (
-		<Box sx={{ p: "15px", width: "100vw", height: "100vh" }}>
+		<Box
+			sx={{ p: "15px", width: "100vw", height: "100vh", position: "relative" }}
+		>
 			<Box
 				sx={{
 					border: (theme) => theme.custom.border,

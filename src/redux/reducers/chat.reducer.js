@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { selectUserToChatWith } from "../actions/chat.action";
+import { resetChatData, selectUserToChatWith } from "../actions/chat.action";
 
 const initialState = {
 	selected: {
@@ -9,11 +9,13 @@ const initialState = {
 };
 
 const chatReducer = createReducer(initialState, (builder) => {
-	builder.addCase(selectUserToChatWith, (state, action) => {
-		const { user } = action.payload;
+	builder
+		.addCase(selectUserToChatWith, (state, action) => {
+			const { user } = action.payload;
 
-		state.selected = user;
-	});
+			state.selected = user;
+		})
+		.addCase(resetChatData, () => initialState);
 });
 
 export default chatReducer;

@@ -29,7 +29,9 @@ function LoginForm() {
 		setUserName(newUserName);
 	};
 
-	const handleUserLogin = () => {
+	const handleUserLogin = (event) => {
+		event.preventDefault();
+
 		if (isValidUserName) {
 			const userListRef = push(getUserListRef());
 
@@ -49,7 +51,7 @@ function LoginForm() {
 	};
 
 	return (
-		<div>
+		<form onSubmit={handleUserLogin}>
 			<TextField
 				value={userName}
 				onChange={handleInputChange}
@@ -61,15 +63,15 @@ function LoginForm() {
 			/>
 
 			<Button
+				type="submit"
 				size="large"
 				color="secondary"
 				variant="contained"
 				sx={{ display: "block", ml: "auto", mr: "auto", mt: "25px" }}
-				onClick={handleUserLogin}
 			>
 				Login
 			</Button>
-		</div>
+		</form>
 	);
 }
 

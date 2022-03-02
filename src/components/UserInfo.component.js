@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserRefByUid } from "./../database/refs.database";
 import { remove } from "firebase/database";
 import { resetUserData } from "../redux/actions/user.action";
+import { resetChatData } from "../redux/actions/chat.action";
 
 function UserInfo() {
 	const user = useSelector((state) => state.user);
@@ -18,6 +19,7 @@ function UserInfo() {
 		const userRef = getUserRefByUid(uid);
 		remove(userRef);
 		dispatch(resetUserData());
+		dispatch(resetChatData());
 	};
 
 	useEffect(() => {
