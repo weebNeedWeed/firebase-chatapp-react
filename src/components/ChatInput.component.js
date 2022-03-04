@@ -44,7 +44,7 @@ function ChatInput(props) {
 		setMessageContent(messageContent + emoji);
 	};
 
-	const renderIconBox = displayIconBox ? (
+	const renderEmojiBox = displayIconBox ? (
 		<Box
 			sx={{
 				position: "absolute",
@@ -90,7 +90,7 @@ function ChatInput(props) {
 			}}
 			onSubmit={handleSendMessage}
 		>
-			{renderIconBox}
+			{renderEmojiBox}
 
 			<IconButton onClick={handleToggleIconBox}>
 				<Emoji symbol={EMOJIS[0]} />
