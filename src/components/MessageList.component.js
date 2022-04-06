@@ -10,6 +10,10 @@ function MessageList(props) {
 
 	const { roomUid, userUid } = props;
 
+	/**
+	 * * If roomUid is missing from deps array, useEffect
+	 * * will not rerun and the chatbox cannot be updated
+	 */
 	useEffect(() => {
 		const roomRef = getRoomRefByUid(roomUid);
 

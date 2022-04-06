@@ -30,7 +30,7 @@ function OnlineUserList() {
 		return () => {
 			off(userListRef);
 		};
-	}, [setOnlineUserList]);
+	}, []);
 
 	return (
 		<Box
